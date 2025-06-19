@@ -1,0 +1,6 @@
+Flask
+openpyxl
+Flask-SQLAlchemy
+qrcode[pil]
+Flask-Login
+werkzeug

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Scan Attendance{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto card p-8 my-8 text-center dark:bg-text">
+    <div class="mb-6">
+        <div class="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-qrcode text-blue-600 text-4xl"></i>
+        </div>
+        <h1 class="text-3xl font-bold mb-2">Event Attendance</h1>
+        <p>Scan to mark your attendance</p>
+    </div>
+    
+    <div class="p-4 bg-white rounded-lg shadow-inner mb-6 border-2 border-gold">
+        <img src="{{ url_for('generate_qr') }}" alt="Attendance QR Code" class="w-full max-w-xs mx-auto">
+    </div>
+    
+    <p class="text-platinum mb-6">Or <a href="{{ url_for('mark_attendance') }}" class="text-gold hover:text-gold-600 font-medium">click here</a> to mark attendance manually</p>
+    
+    <div class="bg-blue-50 p-4 rounded-lg">
+        <p class="text-sm text-blue-800">
+            <i class="fas fa-info-circle mr-2"></i>
+            Make sure you're connected to the same network as the event host
+        </p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}EventTrack Pro{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-jet via-gray-900 to-jet dark-bg-text text-gold">
+    <div class="text-center p-12 border-4 border-gold rounded-3xl shadow-2xl">
+        <h1 class="text-6xl md:text-8xl font-bold mb-6">EventTrack Pro</h1>
+        <p class="text-2xl">by Ishaan Upponi</p>
+        <p class="text-lg mt-4">Registration No: 2411026011266</p>
+        
+        <div class="mt-12">
+            <a href="{{ url_for('dashboard') }}" 
+               class="bg-gold text-jet hover:bg-gold-600 font-bold py-4 px-12 rounded-full text-xl transition-all transform hover:scale-105">
+                Enter System
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

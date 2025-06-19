@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}EventTrack Pro{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="py-20 bg-gradient-to-r from-jet to-gray-900 dark-bg-text">
+    <div class="container mx-auto px-4 text-center">
+        <h1 class="text-5xl font-bold mb-6 text-gold">Effortless Event Attendance</h1>
+        <p class="text-xl mb-8 max-w-2xl mx-auto text-gold">Streamline your event management with our modern attendance tracking solution</p>
+        
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="{{ url_for('qr_page') }}" class="bg-gold text-jet hover:bg-gold-600 font-semibold py-3 px-8 rounded-lg transition transform hover:-translate-y-1">
+                <i class="fas fa-qrcode mr-2"></i> Scan QR Code
+            </a>
+            <a href="{{ url_for('mark_attendance') }}" class="bg-transparent border-2 border-gold text-gold hover:bg-gold hover:text-jet font-semibold py-3 px-8 rounded-lg transition transform hover:-translate-y-1">
+                <i class="fas fa-edit mr-2"></i> Manual Entry
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">Key Features</h2>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Feature 1 -->
+            <div class="card p-8 text-center">
+                <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-bolt text-blue-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">Instant Check-In</h3>
+                <p class="text-gray-600">Quickly mark attendance with a simple QR code scan</p>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="card p-8 text-center">
+                <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-chart-line text-green-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">Real-Time Tracking</h3>
+                <p class="text-gray-600">Monitor attendance data as it happens</p>
+            </div>
+            
+            <!-- Feature 3 -->
+            <div class="card p-8 text-center">
+                <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-file-excel text-purple-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">Easy Export</h3>
+                <p class="text-gray-600">Download attendance reports in Excel format</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Admin CTA -->
+<section class="py-16 bg-platinum">
+    <div class="container mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold mb-6">Event Organizers</h2>
+        <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">Access powerful tools to manage your events and attendees</p>
+        <a href="{{ url_for('login') }}" class="bg-gradient-to-r from-jet to-gray-800 hover:from-gray-800 hover:to-jet text-gold font-semibold py-3 px-8 rounded-lg inline-flex items-center transition transform hover:-translate-y-1">
+            <i class="fas fa-user-shield mr-2"></i> Admin Portal
+        </a>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Mark Attendance{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto card p-8 my-8 border-2 border-gold">
+    <div class="text-center mb-8">
+        <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-user-check text-blue-600 text-3xl"></i>
+        </div>
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">Mark Your Attendance</h1>
+        <p class="text-gray-600">Please provide your details below</p>
+    </div>
+    
+    <form id="attendanceForm" class="space-y-6">
+        <div class="space-y-2">
+            <label class="block text-sm font-medium text-gray-700">Full Name</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fas fa-user text-gray-400"></i>
+                </div>
+                <input type="text" name="name" 
+                       class="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                       placeholder="John Doe" required>
+            </div>
+        </div>
+        
+        <div class="space-y-2">
+            <label class="block text-sm font-medium text-gray-700">Email Address</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fas fa-envelope text-gray-400"></i>
+                </div>
+                <input type="email" name="email" 
+                       class="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                       placeholder="your@email.com" required>
+            </div>
+        </div>
+        
+        <button type="submit" class="w-full bg-gold hover:bg-gold-600 text-jet font-semibold py-3 px-4 rounded-lg flex items-center justify-center transition transform hover:-translate-y-1">
+            <i class="fas fa-check-circle mr-2"></i> Submit Attendance
+        </button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('attendanceForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Processing...';
+        
+        try {
+            const response = await fetch('/mark-attendance', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    name: e.target.name.value,
+                    email: e.target.email.value
+                })
+            });
+            
+            const result = await response.json();
+            
+            if (response.ok) {
+                Swal.fire({
+                    title: 'Success!',
+                    text: result.message,
+                    icon: 'success',
+                    confirmButtonColor: '#4f46e5',
+                });
+                e.target.reset();
+            } else {
+                Swal.fire({
+                    title: 'Error',
+                    text: result.error || 'Failed to mark attendance',
+                    icon: 'error',
+                    confirmButtonColor: '#4f46e5',
+                });
+            }
+        } catch (error) {
+            Swal.fire({
+                title: 'Connection Error',
+                text: 'Could not reach the server. Please try again.',
+                icon: 'error',
+                confirmButtonColor: '#4f46e5',
+            });
+            console.error('Error:', error);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+        }
+    });
+</script>
+{% endblock %}

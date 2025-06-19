@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}EventTrack Pro{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            --color-jet: #0a0a0a;
+            --color-gold: #d4af37;
+            --color-platinum: #e5e4e2;
+            background: linear-gradient(135deg, var(--color-jet) 0%, #333 100%);
+            min-height: 100vh;
+        }
+        .card {
+            backdrop-filter: blur(16px) saturate(180%);
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 12px;
+            border: 1px solid rgba(209, 213, 219, 0.3);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-gold) 0%, #c9a227 100%);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .feature-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .btn-hover {
+            transition: all 0.3s ease;
+        }
+        .btn-hover:hover {
+            transform: translateY(-2px);
+        }
+        .navbar {
+            background: linear-gradient(135deg, var(--color-jet) 0%, #333 100%);
+            color: var(--color-gold);
+        }
+        .footer {
+            background: linear-gradient(135deg, var(--color-jet) 0%, #333 100%);
+            color: var(--color-gold);
+        }
+        .footer-signature {
+            color: var(--color-gold);
+            font-weight: 500;
+        }
+        .dark-bg-text {
+            color: var(--color-gold);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <nav class="navbar text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="{{ url_for('home') }}" class="text-2xl font-bold flex items-center">
+                <i class="fas fa-calendar-check mr-2"></i>
+                EventTrack Pro
+            </a>
+            <div class="flex space-x-4">
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('logout') }}" class="flex items-center px-4 py-2 rounded-lg hover:bg-indigo-500 transition">
+                        <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                    </a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="flex items-center px-4 py-2 rounded-lg hover:bg-indigo-500 transition">
+                        <i class="fas fa-user-shield mr-2"></i> Admin Portal
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow container mx-auto px-4 py-8">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer text-white py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-platinum-300">&copy; 2025 EventTrack Pro</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="footer-signature">Developed by Ishaan Upponi</p>
+                    <p class="text-platinum-300 text-sm">Registration No: 2411026011266</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
